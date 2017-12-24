@@ -65,3 +65,4 @@ After the properties are loaded it is possible to use it as a part of project pr
 ```groovy
 def addressofwatson = another_properties.address
 ```
+
