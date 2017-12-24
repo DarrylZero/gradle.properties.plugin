@@ -1,0 +1,25 @@
+language: java
+
+
+before_install:
+ - chmod +x gradlew
+
+install: gradle assemble
+
+build: gradle build
+
+branches:
+  only:
+  - master
+  - development
+  - /^feature.*$/
+  - /^release.*$/
+
+
+deploy:
+  - provider: script
+    script: sh deploy.sh $repo_user $repo_password
+    on:
+#       branch: master
+     branch: /^release.*$/
+   

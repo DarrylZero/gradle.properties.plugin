@@ -1,0 +1,74 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: "maven"
+apply plugin: "maven"
+apply plugin: 'maven-publish'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    implementation localGroovy()
+    implementation gradleApi()
+    testCompile 'junit:junit:4.12'
+}
+
+def deploy_user = hasProperty('repo_user') ? repo_user : 'repo_user'
+def deploy_password  = hasProperty('repo_password') ? repo_password : 'repo_password'
+
+
+def deploy_repo_host = 'https://clojars.org/repo'
+def publish_group = 'com.steammachine.org'
+def publish_artifact = 'gradle.plugins'
+def publish_version = '0.9.3'
+assert "$publish_group:$publish_artifact:$publish_version" == 'com.steammachine.org:gradle.plugins:0.9.3'
+
+
+
+group = publish_group
+version = publish_version
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    from sourceSets.main.allGroovy
+    classifier "sources"
+
+    manifest {
+        attributes(
+                "Implementation-Title": "gradle plugins",
+                "Implementation-Version": publish_version,
+                "Description": "auxillary gradle plugins",
+        )
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username = deploy_user
+                password = deploy_password
+            }
+            url deploy_repo_host
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            groupId publish_group
+            artifactId publish_artifact
+            version publish_version
+
+            from components.java
+            artifact sourceJar
+        }
+    }
+}
+
+task buildandsources(dependsOn: [sourceJar, build])
+
