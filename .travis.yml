@@ -11,7 +11,7 @@ install: gradle assemble
 
 build:
   - provider: script
-    script: sh deploy.sh $sonar_organization $sonar_login
+    script: sh build.sh $sonar_organization $sonar_login
 
 
 jdk:
