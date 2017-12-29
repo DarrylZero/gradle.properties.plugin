@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 echo "Building ......"
-gradle build sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$1 -Dsonar.login=$2
+gradle build sonarqube -Psonar.host.url=https://sonarcloud.io -Psonar.organization=$1 -Dsonar.login=$2
