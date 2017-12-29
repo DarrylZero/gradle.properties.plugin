@@ -7,11 +7,11 @@ before_install:
 install: gradle assemble
 #install: true
 
-#build: gradle build :propertysetplugin:sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$sonar_organization -Dsonar.login=$sonar_login
+build: gradle build :propertysetplugin:sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$sonar_organization -Dsonar.login=$sonar_login
 
-build:
-  - provider: script
-    script: sh build.sh $sonar_organization $sonar_login
+#build:
+#  - provider: script
+#    script: sh build.sh $sonar_organization $sonar_login
 
 
 jdk:
