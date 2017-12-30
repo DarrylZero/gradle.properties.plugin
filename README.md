@@ -1,9 +1,8 @@
-# UNDER CONSTRUCTION
 # properties gradle plugin
 # gradle.resource.copy.plugin
 gradle copy resources plugin   ![Build Status](https://travis-ci.org/DarrylZero/gradle.resource.copy.plugin.svg?branch=development)
 
-_Simlpe plugin to manage property files_
+_Simlpe plugin to load content of  property files into your project _
 
 
 
@@ -11,8 +10,11 @@ Content of property files is imported into property object which, in turn, becom
 available as properties of string type
 
 
-`Application`: 
-To add plugin dependency do the following :
+
+***Plugin dependency***
+
+To add plugin dependency add the following lines to your script :
+
 ```groovy
 buildscript {
     repositories {
@@ -26,7 +28,10 @@ buildscript {
 ```
 
 
-`Enabling`: To enable plugin add line to your gradle script 
+***Application***
+
+To enable plugin add a line to your gradle script 
+
 ```groovy
 apply plugin: 'com.steammachine.org.gradle.properties.plugins'
 ```
@@ -45,14 +50,13 @@ address=United Kingdom. London. Baker street 221B.
 auxprops.propertyFile file('prop.properties')
 ```
 
-
 Below that line in your script you can refer to that property via auxprops property
 
 ```groovy
-def somedata = auxprops.address
+def somedata = auxprops.address /* after an assignment a field somedata contains a string "United Kingdom. London. Baker street 221B."*/
 ```
 
-There is also another way to add properties to the project object of the gradle script
+There is another way to add properties to the project object of the gradle script
 
 ```groovy
 auxprops.set('another_properties') {
@@ -60,7 +64,7 @@ auxprops.set('another_properties') {
 } 
 ```
 
-After the properties are loaded it is possible to use it as a part of project property (in example case another_properties)
+After the properties are loaded it is possible to use it as a part of project (in example case another_properties)
 
 ```groovy
 def addressofwatson = another_properties.address

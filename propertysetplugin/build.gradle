@@ -1,8 +1,10 @@
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: "maven"
-apply plugin: "maven"
-apply plugin: 'maven-publish'
+plugins {
+    id 'java'
+    id 'groovy'
+    id "maven"
+    id 'maven-publish'
+    id "org.sonarqube" version "2.5"
+}
 
 repositories {
     jcenter()
@@ -19,7 +21,7 @@ dependencies {
 }
 
 def deploy_user = hasProperty('repo_user') ? repo_user : 'repo_user'
-def deploy_password  = hasProperty('repo_password') ? repo_password : 'repo_password'
+def deploy_password = hasProperty('repo_password') ? repo_password : 'repo_password'
 
 
 def deploy_repo_host = 'https://clojars.org/repo'
