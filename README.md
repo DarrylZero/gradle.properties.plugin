@@ -30,7 +30,7 @@ buildscript {
 
 ***Application***
 
-To enable plugin add line to your gradle script 
+To enable plugin add a line to your gradle script 
 
 ```groovy
 apply plugin: 'com.steammachine.org.gradle.properties.plugins'
